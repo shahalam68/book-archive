@@ -15,16 +15,18 @@ const SearchBook = () => {
     // console.log(books)
     const divRow = document.getElementById('book-box');
     books.forEach(book => {
-        console.log(book)
+        // console.log(book)
         const bookBox = document.createElement('div');
         bookBox.classList.add('col-md-3');
+        const imgUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+        console.log(imgUrl);
         bookBox.innerHTML = `
+        <img class ="img-fluid" src="${imgUrl}" alt="">
         <div class="shadow rounded p-3 m-2">
             <h3>${book.title}</h3>
              <p>descriptions</p>
          </div>
-        `
-        
+        ` 
         divRow.appendChild(bookBox);
     });
  }
