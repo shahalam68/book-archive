@@ -2,6 +2,7 @@ const SearchBook = () => {
     // get input text
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
+    searchField.value = '';
     
     // Load Data
     const url = `https://openlibrary.org/search.json?q=${searchText}`
@@ -9,16 +10,17 @@ const SearchBook = () => {
     .then(res => res.json())
     .then(data => setBook(data))
 }
+// Display books
  const setBook = data => {
-    console.log(data.numFound)
+    // console.log(data.numFound)
     const books = data.docs;
-    // console.log(books)
+    console.log(books)
     const divRow = document.getElementById('book-box');
     const counter = document.getElementById('book-counter');
     const error = document.getElementById('error-message');
-    counter.innerText = `${books.length} -- ${data.numFound}`;
+    counter.innerText = `Showing ${books.length} Of ${data.numFound} Result`;
     if(data.numFound === 0){
-        error.innerText = "nothing to show"
+        error.innerHTML = `<h3 class="text-center">Search result not found</h3>`
     }
     else{
         error.innerText = ''
@@ -36,7 +38,8 @@ const SearchBook = () => {
             <img class ="img-fluid" src="${imgUrl}" alt="">
             <div class="shadow rounded p-3 m-2">
             <h3>${book.title}</h3>
-             <p>descriptions</p>
+            <p>Author: ${book.author_name}</p>
+            <p>First Publish: ${book.first_publish_year}</p>
             </div>
         ` 
         divRow.appendChild(bookBox);
